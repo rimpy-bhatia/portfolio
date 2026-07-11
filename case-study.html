@@ -195,11 +195,17 @@
   }
   .open-external:hover { opacity: 0.85; }
 
-  @media (max-width: 600px) {
+  /* @media (max-width: 600px) {
     .topbar { padding: 0 16px; }
     .topbar-right { display: none; }
     .topbar-title { font-size: 13px; }
-  }
+  } */
+  @media (max-width: 600px) {
+  .topbar { padding: 0 16px; }
+  .topbar-right { display: none; }
+  .topbar-title { font-size: 13px; }
+  .viewer-frame, .prototype-frame { min-height: calc(100vh - 64px); width: 100%; }
+}
 </style>
 </head>
 <body>
@@ -247,8 +253,8 @@
       url: 'https://xd.adobe.com/view/e9b8c5c6-1c8f-45b2-8d5b-d458816e18a7-bceb/?fullscreen'
     },
     '4': {
-      title: 'Prepaid Wallets & Cards',
-      tag: 'Prepaid Wallets & Cards · Aditya Birla Capital Digital',
+      title: 'Merchant App & PPI Wallets',
+      tag: 'Merchant & Wallets · Aditya Birla Capital Digital',
       type: 'local',
       url: './static/casestudy/PPI Case Study.pdf'
     },
@@ -280,6 +286,18 @@
     return /^https?:\/\//i.test(url);
   }
 
+  // NEW: detect phone-sized / mobile devices
+  function isMobileDevice() {
+    return window.innerWidth <= 768 || /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+  }
+
+  // NEW: on mobile, tell the browser's PDF viewer to fit page width
+  function withMobilePdfFit(url) {
+    if (!/\.pdf($|\?)/i.test(url)) return url; // only touch actual PDFs (skip mp4 etc.)
+    if (!isMobileDevice()) return url;
+    return url + '#view=FitH&toolbar=1';
+  }
+
   // Renders the "can't embed, open in new tab" fallback panel.
   function renderExternalFallback(url) {
     wrap.innerHTML = `
@@ -305,25 +323,21 @@
     tagEl.textContent = cs.tag;
 
     if (cs.type === 'gdrive') {
-      wrap.innerHTML = `<iframe class="viewer-frame" src="${cs.url}" allow="autoplay" allowfullscreen></iframe>`;
+      wrap.innerHTML = `<iframe class="viewer-frame" src="${withMobilePdfFit(cs.url)}" allow="autoplay" allowfullscreen></iframe>`;
     } else if (cs.type === 'prototype') {
-      // External prototype links (e.g. Adobe XD) usually block iframing
-      // via X-Frame-Options/CSP — open them in a new tab instead.
       if (isExternalLink(cs.url)) {
         renderExternalFallback(cs.url);
       } else {
-        wrap.innerHTML = `<iframe class="prototype-frame" src="${cs.url}" allowfullscreen></iframe>`;
+        wrap.innerHTML = `<iframe class="prototype-frame" src="${withMobilePdfFit(cs.url)}" allowfullscreen></iframe>`;
       }
     } else if (cs.type === 'local') {
-      // Some 'local' entries actually point to external https links
-      // (e.g. id 5). Those get the same external-link treatment.
       if (isExternalLink(cs.url)) {
         renderExternalFallback(cs.url);
       } else {
         wrap.innerHTML = `
           <iframe
             class="viewer-frame"
-            src="${cs.url}"
+            src="${withMobilePdfFit(cs.url)}"
             width="100%"
             height="100%"
             style="border:none;">
