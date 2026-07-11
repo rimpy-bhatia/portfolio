@@ -766,6 +766,36 @@
 .review-track {
   min-width: 0;
 }
+/* ---------- Mobile Experience Timeline (separate, simpler layout) ---------- */
+.timeline-mobile { display: none; }
+.tlm-item {
+  position: relative;
+  padding: 0 0 32px 24px;
+  border-left: 2px solid #e0ddd8;
+}
+.tlm-item:last-child { border-left-color: transparent; padding-bottom: 0; }
+.tlm-item.active { border-left-color: #C7222A; }
+.tlm-dot {
+  position: absolute;
+  left: -7px; top: 2px;
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  background: #fff;
+  border: 2px solid #ccc;
+}
+.tlm-item.active .tlm-dot {
+  background: #C7222A;
+  border-color: #C7222A;
+  box-shadow: 0 0 0 3px rgba(139,0,0,.15);
+}
+.tlm-item.active .tl-role { color: #111; font-weight: 800; }
+.tlm-item.active .tl-date { color: #8B0000; }
+
+@media (max-width: 700px) {
+  .timeline-scroll-wrap { display: none; }
+  .timeline-mobile { display: block; padding: 0 20px; }
+}
+
 </style>
 </head>
 <body>
@@ -1099,6 +1129,46 @@
           <div class="tl-below" style="visibility:hidden; min-height:180px;"></div>
         </div>
 
+      </div>
+    </div>
+    
+  </div>
+  <!-- Simple stacked timeline for mobile — avoids the spine-vs-text collision -->
+  <div class="timeline-mobile">
+    <div class="tlm-item">
+      <div class="tlm-dot"></div>
+      <div class="tl-content">
+        <div class="tl-date">2007 – 2014</div>
+        <div class="tl-role">Telemarketing Lead</div>
+        <div class="tl-company">Leadership Foundations</div>
+        <div class="tl-desc">• Built nationwide engagement teams<br>• Standardized customer outreach<br>• Mentored and trained regional teams</div>
+      </div>
+    </div>
+    <div class="tlm-item">
+      <div class="tlm-dot"></div>
+      <div class="tl-content">
+        <div class="tl-date">2014 – 2016</div>
+        <div class="tl-role">Content Head</div>
+        <div class="tl-company">Datacomp Web Technologies</div>
+        <div class="tl-desc">Digital Content Leadership<br>• Led multilingual content strategy<br>• Managed UX Writing<br>• Built scalable content operations</div>
+      </div>
+    </div>
+    <div class="tlm-item">
+      <div class="tlm-dot"></div>
+      <div class="tl-content">
+        <div class="tl-date">2016 – 2024</div>
+        <div class="tl-role">Project Lead — UI/UX Design</div>
+        <div class="tl-company">Datacomp Web Technologies</div>
+        <div class="tl-desc">Enterprise BFSI Experiences<br>• Led UX for India's leading insurers<br>• Managed Design &amp; Development teams<br>• Designed Magic Gyan platform<br>• Directed UX Writing &amp; Digital Strategy</div>
+      </div>
+    </div>
+    <div class="tlm-item active">
+      <div class="tlm-dot"></div>
+      <div class="tl-content">
+        <div class="tl-date">Mar 2024 – Present</div>
+        <div class="tl-role">Lead Product Design (UI/UX)</div>
+        <div class="tl-company">Aditya Birla Capital Digital</div>
+        <div class="tl-desc">Scaling Fintech Design<br>• Built the in-house UX team (−75% outsourcing)<br>• 2.3M+ VPAs · +45% VPA adoption<br>• Led flagship UPI innovations<br>• Built Design System (1000+ screens)</div>
       </div>
     </div>
   </div>
