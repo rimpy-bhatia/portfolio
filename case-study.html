@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Case Study — Rimpy Bhatia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; }
+  body {
+    font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: #111;
+    background: #fff;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    display: flex;
+    flex-direction: column;
+  }
+  a { color: inherit; text-decoration: none; }
+
+  /* ---------- Top bar ---------- */
+  .topbar {
+    background: #f5f5f4;
+    border-bottom: 1px solid rgba(0,0,0,0.07);
+    padding: 0 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+    flex-shrink: 0;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+  }
+  .back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #111;
+    cursor: pointer;
+    background: none;
+    border: none;
+    font-family: inherit;
+    transition: opacity .2s;
+  }
+  .back-btn:hover { opacity: 0.6; }
+  .back-arrow { font-size: 18px; line-height: 1; }
+
+  .topbar-center {
+    text-align: center;
+  }
+  .topbar-title {
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  .topbar-sub {
+    font-size: 12px;
+    color: #8a8a8a;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .topbar-right {
+    font-size: 14px;
+    color: #8a8a8a;
+  }
+  .topbar-logo {
+    font-size: 14px;
+    font-weight: 700;
+    color: #111;
+  }
+
+  /* ---------- Viewer ---------- */
+  .viewer-wrap {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background: #1a1a1a;
+    min-height: 0;
+  }
+
+  /* For Google Drive PDFs */
+  .viewer-frame {
+    flex: 1;
+    width: 100%;
+    border: none;
+    min-height: calc(100vh - 64px);
+  }
+
+  /* For Adobe XD prototypes */
+  .prototype-wrap {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0;
+  }
+  .prototype-frame {
+    width: 100%;
+    flex: 1;
+    border: none;
+    min-height: calc(100vh - 64px);
+  }
+
+  /* ---------- Loading state ---------- */
+  .loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    gap: 16px;
+    color: #888;
+    min-height: calc(100vh - 64px);
+  }
+  .loading-spinner {
+    width: 36px;
+    height: 36px;
+    border: 3px solid rgba(255,255,255,0.1);
+    border-top-color: #e8d9b9;
+    border-radius: 50%;
+    animation: spin .8s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .loading p { font-size: 14px; }
+
+  /* ---------- Not found ---------- */
+  .not-found {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    gap: 20px;
+    color: #888;
+    padding: 40px;
+    text-align: center;
+    min-height: calc(100vh - 64px);
+  }
+  .not-found h2 {
+    font-size: 24px;
+    font-weight: 700;
+    color: #ccc;
+  }
+  .not-found p { font-size: 14px; line-height: 1.6; max-width: 360px; }
+  .not-found a {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #e8d9b9;
+    border-bottom: 1px solid rgba(232,217,185,0.3);
+    padding-bottom: 2px;
+    transition: border-color .2s;
+  }
+  .not-found a:hover { border-color: #e8d9b9; }
+
+  /* ---------- Open externally fallback ---------- */
+  .external-notice {
+    background: rgba(232,217,185,0.08);
+    border: 1px solid rgba(232,217,185,0.2);
+    border-radius: 8px;
+    padding: 24px 28px;
+    margin: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .external-notice p {
+    color: #aaa;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  .open-external {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #e8d9b9;
+    color: #2a1a00;
+    font-size: 14px;
+    font-weight: 700;
+    padding: 12px 20px;
+    border-radius: 4px;
+    transition: opacity .2s;
+    text-decoration: none;
+  }
+  .open-external:hover { opacity: 0.85; }
+
+  @media (max-width: 600px) {
+    .topbar { padding: 0 16px; }
+    .topbar-right { display: none; }
+    .topbar-title { font-size: 13px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar" id="topbar">
+  <button class="back-btn" onclick="window.location.href='index.html'">
+    <span class="back-arrow">←</span> Back to Portfolio
+  </button>
+  <div class="topbar-center">
+    <div class="topbar-title" id="cs-title">Loading…</div>
+    <div class="topbar-sub" id="cs-tag"></div>
+  </div>
+  <div class="topbar-logo">Rimpy Bhatia</div>
+</div>
+
+<!-- VIEWER -->
+<div class="viewer-wrap" id="viewerWrap">
+  <div class="loading" id="loadingState">
+    <div class="loading-spinner"></div>
+    <p>Loading case study…</p>
+  </div>
+</div>
+
+<script>
+  // Case study data
+  const caseStudies = {
+    '1': {
+      title: 'UPI & Bill Payments App',
+      tag: 'Payments · Aditya Birla Capital Digital',
+      type: 'gdrive',
+      // Google Drive file – convert view URL to embedded preview
+      url: './static/casestudy/ABCD App Case Study.pdf'
+    },
+    '2': {
+      title: 'Payment Lounge Redesign',
+      tag: 'Payments · Aditya Birla Capital Digital',
+      type: 'gdrive',
+      url: './static/casestudy/Payment lounge - Case Study.pdf'
+    },
+    '3': {
+      title: 'SBI NASA — Sales Enablement App',
+      tag: 'Insurance · SBI Life',
+      type: 'prototype',
+      url: 'https://xd.adobe.com/view/e9b8c5c6-1c8f-45b2-8d5b-d458816e18a7-bceb/?fullscreen'
+    },
+    '4': {
+      title: 'Merchant App & PPI Wallets',
+      tag: 'Merchant & Wallets · Aditya Birla Capital Digital',
+      type: 'local',
+      url: './static/casestudy/PPI Case Study.pdf'
+    },
+     '5': {
+      title: 'Fwd Insurance Portal',
+      tag: 'Forward Insurance Company - Malaysia',
+      type: 'local',
+      url: 'https://xd.adobe.com/view/9c799ad2-d045-410a-99b1-e862cfabde54-c92a/'
+    },
+     '6': {
+      title: 'Insurance Concept Videos',
+      tag: 'Insurance Videos',
+      type: 'local',
+      url: './static/casestudy/Retire and enjoy.mp4'
+    }
+  };
+
+  const params = new URLSearchParams(window.location.search);
+  const id = params.get('id') || '1';
+  const cs = caseStudies[id];
+
+  const titleEl = document.getElementById('cs-title');
+  const tagEl = document.getElementById('cs-tag');
+  const wrap = document.getElementById('viewerWrap');
+
+  // Helper: true if a URL points to an external site (as opposed to a
+  // local/relative file we can safely put in an iframe).
+  function isExternalLink(url) {
+    return /^https?:\/\//i.test(url);
+  }
+
+  // Renders the "can't embed, open in new tab" fallback panel.
+  function renderExternalFallback(url) {
+    wrap.innerHTML = `
+      <div class="external-notice">
+        <p>This case study is hosted externally, please follow the link to view.</p>
+        <a class="open-external" href="${url}" target="_blank" rel="noopener noreferrer">
+          Open case study ↗
+        </a>
+      </div>`;
+  }
+
+  if (!cs) {
+    titleEl.textContent = 'Case Study Not Found';
+    tagEl.textContent = '';
+    wrap.innerHTML = `
+      <div class="not-found">
+        <h2>Case study not found</h2>
+        <p>This case study doesn't exist or the link may be broken.</p>
+        <a href="index.html">← Return to portfolio</a>
+      </div>`;
+  } else {
+    titleEl.textContent = cs.title;
+    tagEl.textContent = cs.tag;
+
+    if (cs.type === 'gdrive') {
+      wrap.innerHTML = `<iframe class="viewer-frame" src="${cs.url}" allow="autoplay" allowfullscreen></iframe>`;
+    } else if (cs.type === 'prototype') {
+      // External prototype links (e.g. Adobe XD) usually block iframing
+      // via X-Frame-Options/CSP — open them in a new tab instead.
+      if (isExternalLink(cs.url)) {
+        renderExternalFallback(cs.url);
+      } else {
+        wrap.innerHTML = `<iframe class="prototype-frame" src="${cs.url}" allowfullscreen></iframe>`;
+      }
+    } else if (cs.type === 'local') {
+      // Some 'local' entries actually point to external https links
+      // (e.g. id 5). Those get the same external-link treatment.
+      if (isExternalLink(cs.url)) {
+        renderExternalFallback(cs.url);
+      } else {
+        wrap.innerHTML = `
+          <iframe
+            class="viewer-frame"
+            src="${cs.url}"
+            width="100%"
+            height="100%"
+            style="border:none;">
+          </iframe>`;
+      }
+    }
+  }
+</script>
+</body>
+</html>
