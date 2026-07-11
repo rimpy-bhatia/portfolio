@@ -1,0 +1,1276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Portfolio — Rimpy Bhatia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  /* ---------- Reset ---------- */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: #111;
+    background: #fff;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  img, svg, video, iframe { max-width: 100%; }
+  img { max-width: 100%; display: block; }
+  a { color: inherit; text-decoration: none; }
+  button { font-family: inherit; cursor: pointer; border: none; background: none; }
+
+  /* ---------- Layout ---------- */
+  .container { max-width: 1280px; margin: 0 auto; padding: 0 48px; }
+
+  /* ---------- Navbar ---------- */
+  .navbar {
+    position: sticky; top: 0; z-index: 50;
+    background: #f5f5f4;
+    border-bottom: 1px solid rgba(0,0,0,0.04);
+  }
+  .nav-inner {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 22px 48px;
+    max-width: 1280px; margin: 0 auto;
+  }
+  .logo { font-size: 15px; font-weight: 600; letter-spacing: -0.01em; }
+  .nav-links { display: flex; gap: 36px; align-items: center; }
+  .nav-links a {
+    font-size: 14px; font-weight: 500; color: #111;
+    transition: opacity .2s ease;
+  }
+  .nav-links a:hover { opacity: 0.55; }
+  .nav-toggle { display: none; }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    background: #f5f5f4;
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+  .hero-left { padding-top: 40px; }
+  .hero-image {
+    width: 100%;
+    object-fit: cover;
+    border-radius: 2px;
+  }
+  .hero-name {
+    font-size: clamp(48px, 7vw, 42px);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    white-space: nowrap;
+    margin-top: 16px;
+  }
+  .hero-right {
+    padding-top: 60px;
+    padding-right: 20px;
+  }
+  .hero-welcome {
+    font-size: clamp(66px, 4.5vw, 56px);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    margin-bottom: 28px;
+  }
+  .hero-welcome1 {
+    font-size: clamp(36px, 4.5vw, 16px);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    margin-bottom: 28px;
+  }
+  .hero-desc {
+    color: #303030;
+    font-size: 20px;
+    line-height: 1.6;
+    max-width: 420px;
+    margin-bottom: 36px;
+  }
+  .hero-link {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 14px; font-weight: 500;
+    border-bottom: 1px solid transparent;
+    transition: border-color .2s ease;
+  }
+  .hero-link:hover { border-bottom-color: #111; }
+  .scroll-more {
+    margin-top: 200px;
+    display: flex; justify-content: flex-end;
+  }
+  .scroll-more span {
+    display: inline-flex; align-items: center; gap: 10px;
+    color: #6b6b6b; font-size: 14px;
+  }
+
+  /* ---------- Metrics ---------- */
+  .metrics-bar {
+    background: #111;
+    padding: 1px 0;
+  }
+  .metrics-inner {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+  }
+  .metric-item {
+    padding: 20px 40px;
+    border-right: 1px solid rgba(255,255,255,0.1);
+    text-align: center;
+  }
+  .metric-item:last-child { border-right: none; }
+  .metric-num {
+    font-size: clamp(22px, 4vw, 32px);
+    font-weight: 800;
+    color: #e8d9b9;
+    letter-spacing: -0.03em;
+    line-height: 1;
+  }
+  .metric-label {
+    font-size: 12px;
+    color: #ffffff;
+    margin-top: 8px;
+    line-height: 1.4;
+    letter-spacing: 0.02em;
+  }
+
+  /* ---------- Marquee ---------- */
+  .marquee-wrap {
+    background: #f5f5f4;
+    padding: 28px 0;
+    border-bottom: 1px solid #eee;
+    overflow: hidden;
+  }
+  .marquee-label {
+    text-align: center;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: #111;
+    margin-bottom: 18px;
+  }
+  .marquee-track {
+    display: flex;
+    gap: 48px;
+    animation: marquee 22s linear infinite;
+    width: max-content;
+  }
+  .marquee-wrap:hover .marquee-track { animation-play-state: paused; }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+  .marquee-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 22px;
+    font-weight: 600;
+    color: #333;
+    white-space: nowrap;
+    letter-spacing: -0.01em;
+  }
+  .marquee-item .tag {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    background: #e8d9b9;
+    color: #6b4f1a;
+    padding: 2px 8px;
+    border-radius: 20px;
+  }
+
+  /* ---------- Section heading ---------- */
+  .section { padding: 60px 0; }
+  .section-head {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 80px;
+    margin-bottom: 80px;
+  }
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 16px;
+    font-size: 18px; font-weight: 600; letter-spacing: -0.01em;
+  }
+  .eyebrow::before {
+    content: ""; width: 40px; height: 1px; background: #c8c8c8;
+  }
+  .section-intro {
+    font-size: 22px; font-weight: 600; line-height: 1.45;
+    letter-spacing: -0.01em; color: #1a1a1a;
+    max-width: 520px;
+  }
+
+  /* ---------- Works grid ---------- */
+  .works-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 32px;
+  }
+  .work-card {
+    background: #f6f5f3;
+    padding: 28px;
+    border-radius: 2px;
+    transition: transform .35s ease;
+    cursor: pointer;
+    display: block;
+    text-decoration: none;
+    color: inherit;
+  }
+  .work-card:hover { transform: translateY(-4px); }
+  .work-card .thumb {
+    width: 100%;
+    aspect-ratio: 16/10;
+    object-fit: cover;
+    border-radius: 2px;
+    margin-bottom: 28px;
+  }
+  .work-meta {
+    display: flex; justify-content: space-between; align-items: center;
+    border-top: 1px solid #e5e3df;
+    padding-top: 20px;
+  }
+  .work-title { font-size: 18px; font-weight: 700; letter-spacing: -0.01em; }
+  .work-tag { font-size: 11px; color: #8a8a8a; letter-spacing: 0.04em; text-transform: uppercase; }
+  /* .work-arrow {
+    font-size: 13px; color: #8a8a8a; font-weight: 500;
+    display: inline-flex; align-items: center; gap: 6px;
+    margin-top: 10px;
+    transition: gap .2s ease;
+  }
+  .work-card:hover .work-arrow { gap: 10px; } */
+  .work-arrow {
+    font-size: 13px;
+    color: #ffffff;
+    font-weight: 600;
+
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+
+    margin-top: 10px;
+    padding: 10px 14px;
+
+    background: #C7222A;
+    border-radius: 8px;
+
+    cursor: pointer;
+    transition: all 0.25s ease;
+    text-decoration: none;
+}
+
+/* hover effect */
+.work-card:hover .work-arrow {
+    gap: 10px;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px rgba(199, 34, 42, 0.25);
+}
+
+/* optional hover color tweak */
+.work-arrow:hover {
+    background: #a91d23;
+}
+
+  /* ---------- View More Works ---------- */
+  .works-more {
+    display: none;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    margin-top: 32px;
+  }
+  .works-more.visible { display: grid; }
+  .view-more-wrap {
+    text-align: center;
+    margin-top: 40px;
+  }
+  .view-more-btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 14px; font-weight: 600;
+    color: #111;
+    border: 1.5px solid #111;
+    padding: 12px 28px;
+    border-radius: 2px;
+    cursor: pointer;
+    background: none;
+    transition: background .2s, color .2s;
+    letter-spacing: -0.01em;
+  }
+  .view-more-btn:hover { background: #111; color: #fff; }
+  .view-more-btn .btn-arrow { transition: transform .3s ease; }
+  .view-more-btn.open .btn-arrow { transform: rotate(180deg); }
+
+  /* ---------- Services ---------- */
+  .service-row {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 60px;
+    align-items: center;
+    padding: 40px 0;
+    border-bottom: 1px solid #eee;
+  }
+  .service-row:first-of-type { border-top: 1px solid #eee; }
+  .service-num { font-size: 12px; color: #9a9a9a; letter-spacing: 0.08em; }
+  .service-name { font-size: 24px; font-weight: 700; letter-spacing: -0.02em; margin-top: 12px; }
+  .service-desc { color: #6b6b6b; font-size: 15px; line-height: 1.55; }
+  .service-img {
+    width: 100%; aspect-ratio: 16/6; object-fit: cover; border-radius: 2px;
+  }
+
+  /* ---------- About ---------- */
+  .about-grid {
+    display: grid; grid-template-columns: 1fr 1.1fr; gap: 80px;
+    align-items: start;
+  }
+  .about-left .eyebrow { margin-bottom: 32px; }
+  .about-name {
+    font-size: clamp(40px, 5.5vw, 72px);
+    font-weight: 800; letter-spacing: -0.03em;
+    line-height: 1; margin-bottom: 28px;
+  }
+  .about-bio { color: #6b6b6b; font-size: 15px; line-height: 1.6; max-width: 440px; margin-bottom: 32px; }
+  .contact-link {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-weight: 600; font-size: 15px;
+  }
+  .contact-link:hover { opacity: 0.7; }
+
+  /* ---------- Experience Timeline (redesigned) ---------- */
+  .experience-section {
+  padding: 60px 0 80px;
+  background: #f5f5f4;  /* ← change from #fff to #f5f5f4 */
+}
+  .experience-header {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 48px;
+    margin-bottom: 48px;
+  }
+  .timeline-scroll-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 0 48px 24px;
+  }
+  .timeline-outer {
+    position: relative;
+    min-width: 900px;
+    padding: 0;
+  }
+  /* The horizontal spine */
+  .timeline-spine {
+    position: absolute;
+    left: 0; right: 0;
+    top: 50%;
+    height: 2px;
+    background: #e0ddd8;
+    transform: translateY(-50%);
+    z-index: 0;
+  }
+  .timeline-items {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    position: relative;
+    z-index: 1;
+  }
+  /* Each column: top half for above-line, bottom half for below-line */
+  .tl-col {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0 20px;
+    position: relative;
+  }
+  /* Content that sits ABOVE the spine */
+  .tl-above {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    min-height: 200px;
+    justify-content: flex-end;
+    padding-bottom: 24px;
+    position: relative;
+  }
+  /* Content that sits BELOW the spine */
+  .tl-below {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    min-height: 200px;
+    justify-content: flex-start;
+    padding-top: 24px;
+    position: relative;
+  }
+  /* The dot ON the spine */
+  .tl-dot {
+    position: absolute;
+    left: 20px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #fff;
+    border: 2px solid #ccc;
+    z-index: 3;
+    flex-shrink: 0;
+  }
+  .tl-above .tl-dot {
+    bottom: -7px;
+  }
+  .tl-below .tl-dot {
+    top: -7px;
+  }
+  .tl-col.active .tl-dot {
+    background: #8B0000;
+    border-color: #8B0000;
+    box-shadow: 0 0 0 3px rgba(139,0,0,0.12);
+  }
+  /* Vertical connector line from content to dot */
+  .tl-connector {
+    width: 1px;
+    background: #e0ddd8;
+    flex-shrink: 0;
+    align-self: flex-start;
+    margin-left: 6px;
+  }
+  .tl-above .tl-connector {
+    height: 24px;
+    order: 1;
+  }
+  .tl-below .tl-connector {
+    height: 24px;
+    order: -1;
+  }
+  /* Text blocks — left aligned */
+  .tl-content {
+    text-align: left;
+  }
+  .tl-date {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #8a8888;
+    margin-bottom: 6px;
+  }
+  .tl-role {
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: #111;
+    margin-bottom: 3px;
+    line-height: 1.3;
+  }
+  .tl-company {
+    font-size: 12px;
+    color: #646262;
+    margin-bottom: 10px;
+    font-weight: 500;
+  }
+  .tl-desc {
+    font-size: 13px;
+    color: #313030;
+    line-height: 1.6;
+  }
+  .tl-col.active .tl-date { color: #8B0000; }
+  .tl-col.active .tl-role { color: #111; font-weight: 800; }
+  .tl-col.active .tl-company { color: #444; }
+  .tl-col.active .tl-desc { color: #393838; }
+
+  @media (max-width: 900px) {
+    .timeline-scroll-wrap { padding: 0 20px 20px; }
+    .timeline-outer { min-width: 760px; }
+  }
+
+  /* ---------- Reviews ---------- */
+  .reviews-grid {
+    display: grid; grid-template-columns: 1fr 1.6fr; gap: 80px;
+    align-items: start;
+  }
+  .review-text { color: #6b6b6b; font-size: 15px; line-height: 1.6; max-width: 380px; margin-top: 18px; }
+  .review-viewport { overflow: hidden; position: relative; }
+  .review-track {
+    display: flex; gap: 24px;
+    transition: transform .5s cubic-bezier(.4,0,.2,1);
+  }
+  .review-card {
+    flex: 0 0 calc(100% - 60px);
+    background: #f6f5f3;
+    border-radius: 4px;
+    padding: 36px 40px 32px;
+    min-height: 20px;
+    display: flex; flex-direction: column;
+    position: relative;
+    overflow: visible;
+  }
+  /* Decorative dark-red shapes on testimonial cards */
+  .review-card::before {
+    content: "";
+    position: absolute;
+    top: -14px;
+    right: 28px;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: #cd4b4b;
+    opacity: 0.85;
+    z-index: 2;
+  }
+  .review-card::after {
+    content: "";
+    position: absolute;
+    top: -8px;
+    right: 64px;
+    width: 14px;
+    height: 14px;
+    border-radius: 2px;
+    background: #C7222A;
+    opacity: 0.35;
+    z-index: 2;
+  }
+  .review-card-inner-deco {
+    position: absolute;
+    bottom: 24px;
+    right: 24px;
+    width: 36px;
+    height: 36px;
+    border: 2px solid #C7222A;
+    border-radius: 50%;
+    opacity: 0.18;
+    pointer-events: none;
+  }
+  /* Author block at top */
+  .review-author {
+    display: flex; align-items: center; gap: 14px;
+    margin-bottom: 20px;
+  }
+  .review-avatar {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: #e8d9b9; color: #6b4f1a;
+    font-size: 12px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .author-title { font-size: 13px; color: #111; font-weight: 600; }
+  .author-name { font-size: 13px; color: #8a8a8a; margin-top: 2px; }
+  .quote-mark { font-size: 36px; color: #d0cfca; line-height: 1; font-family: Georgia, serif; font-weight: 700; }
+  .review-quote {
+    font-size: clamp(16px, 1.6vw, 22px);
+    font-weight: 700; letter-spacing: -0.01em;
+    line-height: 1.35; margin: 12px 0 0;
+    color: #111;
+  }
+  .review-dots {
+    display: flex; justify-content: center; gap: 8px; margin-top: 32px;
+  }
+  .review-dot {
+    width: 8px; height: 8px; border-radius: 50%; background: #d6d4cf;
+    transition: background .2s ease, width .2s ease;
+    cursor: pointer;
+  }
+  .review-dot.active { background: #111; width: 22px; border-radius: 4px; }
+
+  /* Reviews section decorative accent beside the column */
+  .reviews-left-deco {
+    position: relative;
+  }
+  .reviews-left-deco::after {
+    content: "";
+    display: block;
+    width: 48px;
+    height: 4px;
+    background: #C7222A;
+    border-radius: 2px;
+    margin-top: 28px;
+    opacity: 0.7;
+  }
+
+  /* ---------- CTA ---------- */
+  .cta {
+    background: #0a0a0a;
+    color: #fff;
+    padding: 100px 0 80px;
+  }
+  .cta-title {
+    font-size: clamp(48px, 11vw, 160px);
+    font-weight: 800;
+    color: #e8d9b9;
+    letter-spacing: -0.04em;
+    line-height: 0.95;
+    margin-bottom: 40px;
+  }
+  .cta-sub {
+    color: #888;
+    font-size: 15px;
+    max-width: 400px;
+    margin-bottom: 40px;
+    line-height: 1.6;
+  }
+  .cta-link {
+    display: inline-flex; align-items: center; gap: 14px;
+    font-size: 20px; font-weight: 600;
+    float: right;
+    margin-bottom: 80px;
+  }
+
+  /* ---------- Footer ---------- */
+  .footer {
+    background: #0a0a0a; color: #fff;
+    padding: 60px 0 40px;
+    border-top: 1px solid #1a1a1a;
+  }
+  .footer-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 40px;
+    padding-bottom: 60px;
+  }
+  .footer-logo { font-size: 16px; font-weight: 700; margin-bottom: 20px; }
+  .footer-info { font-size: 14px; color: #b5b5b5; line-height: 1.7; }
+  .footer-links {
+    display: flex; flex-direction: column; gap: 12px;
+    align-items: flex-end;
+  }
+  .footer-links a {
+    font-size: 14px; font-weight: 500; color: #fff;
+    transition: opacity .2s;
+  }
+  .footer-links a:hover { opacity: 0.6; }
+  .footer-bottom {
+    font-size: 12px; color: #6b6b6b;
+    padding-top: 28px;
+    border-top: 1px solid #1a1a1a;
+  }
+
+  /* ---------- Mobile Responsive ---------- */
+  @media (max-width: 900px) {
+    .container { padding: 0 20px; }
+    .nav-inner { padding: 18px 20px; }
+
+    .nav-links {
+      display: none;
+      position: absolute; top: 100%; left: 0; right: 0;
+      flex-direction: column; gap: 0; background: #f5f5f4;
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+      z-index: 100;
+    }
+    .nav-links.open { display: flex; }
+    .nav-links a { padding: 14px 20px; border-top: 1px solid rgba(0,0,0,0.05); width: 100%; }
+    .nav-toggle {
+      display: flex; flex-direction: column; gap: 5px;
+      width: 28px; height: 22px; justify-content: center;
+    }
+    .nav-toggle span {
+      display: block; height: 2px; background: #111; border-radius: 2px;
+    }
+
+    .hero { padding: 40px 0 60px; }
+    .hero-grid { grid-template-columns: 1fr; gap: 32px; }
+    .hero-left { padding-top: 0; order: 2; }
+    .hero-right { padding-top: 0; padding-right: 0; order: 1; }
+    .hero-name { font-size: 44px; margin-top: 20px; }
+    .scroll-more { margin-top: 32px; justify-content: flex-start; }
+
+    .metrics-inner { grid-template-columns: 1fr 1fr; }
+    .metric-item {
+      padding: 20px 16px;
+      border-right: 1px solid rgba(255,255,255,0.1);
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .metric-item:nth-child(2), .metric-item:nth-child(4) { border-right: none; }
+    .metric-item:nth-child(3), .metric-item:nth-child(4) { border-bottom: none; }
+
+    .section { padding: 60px 0; }
+    .section-head { grid-template-columns: 1fr; gap: 20px; margin-bottom: 36px; }
+    .section-intro { font-size: 17px; }
+
+    .works-grid { grid-template-columns: 1fr; gap: 16px; }
+    .works-more { grid-template-columns: 1fr; }
+    .work-card { padding: 16px; }
+
+    .service-row { grid-template-columns: 1fr; gap: 14px; padding: 24px 0; }
+    .service-img { aspect-ratio: 16/8; }
+    .service-name { font-size: 20px; }
+
+    .about-grid { grid-template-columns: 1fr; gap: 40px; }
+    .about-name { font-size: 40px; }
+
+    .reviews-grid { grid-template-columns: 1fr; gap: 36px; }
+    /* .review-card { flex: 0 0 calc(100% - 16px); padding: 24px; min-height: auto; } */
+    .review-card {
+  flex: 0 0 100%;
+  padding: 24px 20px;
+  min-height: auto;
+}
+.review-quote { font-size: 16px; }
+.review-author { gap: 10px; margin-bottom: 14px; }
+.review-avatar { width: 32px; height: 32px; font-size: 11px; }
+.author-title, .author-name { font-size: 12px; }
+
+/* pull decorative shapes inward so they never poke past the card edge */
+.review-card::before { top: -10px; right: 16px; width: 20px; height: 20px; }
+.review-card::after  { top: -6px; right: 42px; width: 10px; height: 10px; }
+.review-card-inner-deco { width: 28px; height: 28px; bottom: 16px; right: 16px; }
+
+.review-dot { width: 10px; height: 10px; }
+.review-dot.active { width: 26px; }
+    .review-quote { font-size: 16px; }
+
+    .cta { padding: 60px 0 48px; }
+    .cta-link { float: none; display: inline-flex; margin-top: 20px; margin-bottom: 48px; font-size: 16px; }
+
+    .footer-grid { grid-template-columns: 1fr; gap: 28px; padding-bottom: 32px; }
+    .footer-links { align-items: flex-start; }
+
+    .marquee-track { gap: 32px; }
+
+    .experience-header { padding: 0 20px; }
+    .timeline-scroll-wrap { padding: 0 20px 20px; }
+  }
+
+  @media (max-width: 480px) {
+    .hero-name { font-size: 36px; }
+    .hero-welcome { font-size: 32px; }
+    .metric-num { font-size: 28px; }
+    .works-grid { gap: 12px; }
+    .cta-title { font-size: 44px; }
+    .about-name { font-size: 34px; }
+    .review-card { padding: 20px 16px; }
+.review-quote { font-size: 15px; line-height: 1.4; }
+.review-text { font-size: 14px; }
+  }
+
+  /* .highlight-domain {
+    font-weight: 700;
+    background: linear-gradient(90deg, #C7222A, #CD4B4B);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+} */
+ .highlight-domain {
+    font-weight: 700;
+    background: linear-gradient(90deg, #C7222A, #FF6B6B);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    
+}
+
+.reviews-grid > div {
+  min-width: 0;
+}
+.review-viewport {
+  min-width: 0;
+  width: 100%;
+}
+.review-track {
+  min-width: 0;
+}
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<header class="navbar" data-testid="navbar">
+  <div class="nav-inner">
+    <div class="logo" data-testid="brand-logo">Rimpy Bhatia</div>
+    <button class="nav-toggle" data-testid="nav-toggle" aria-label="menu">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="nav-links" data-testid="nav-links">
+      <a href="#works">Works</a>
+      <a href="#services">Services</a>
+      <a href="#about">About</a>
+      <a href="#reviews">Testimonials</a>
+      <!-- CHANGE 2: AI & Learning opens a PDF -->
+      <a href="#" onclick="openPDF(); return false;">AI &amp; Learning</a>
+    </nav>
+  </div>
+</header>
+<!-- PDF Overlay -->
+<div id="pdfOverlay" style="display:none; position:fixed; inset:0; background:#fff; z-index:200; flex-direction:column;">
+  <div style="display:flex; align-items:center; gap:16px; padding:16px 24px; border-bottom:1px solid #e5e3df; background:#f5f5f4;">
+    <button onclick="closePDF()" style="display:inline-flex; align-items:center; gap:8px; font-family:inherit; font-size:14px; font-weight:600; color:#111; border:1.5px solid #111; padding:8px 18px; border-radius:2px; cursor:pointer; background:none; transition:background .2s, color .2s;" onmouseover="this.style.background='#111';this.style.color='#fff'" onmouseout="this.style.background='none';this.style.color='#111'">
+      ← Back
+    </button>
+    <span style="font-size:14px; color:#6b6b6b;">AI &amp; Learning Certifications</span>
+  </div>
+  <iframe id="pdfFrame" src="" style="flex:1; border:none; width:100%;"></iframe>
+</div>
+
+<!-- HERO -->
+<section class="hero" data-testid="hero">
+  <div class="container">
+    <div class="hero-right">
+      <h2 class="hero-welcome" data-testid="hero-welcome">Designing trusted digital<br> experiences for<br><span class="highlight-domain">Banking, Fintech &amp; Insurance</span></h2>
+    <p class="hero-desc" data-testid="hero-desc">
+  Design leader with 18+ years driving UX strategy and digital transformation across fintech, payments and BFSI — scaling design teams, optimizing CX and shipping regulatory-compliant products that move real business metrics.
+</p>
+<a href="static/Rimpy Resume_06_2026.pdf" download
+   style="display:inline-flex; align-items:center; gap:10px; 
+          font-family:inherit; font-size:14px; font-weight:600; color:#fff;
+          background:#c7222a; border:1.5px solid #c7222a; padding:12px 24px;
+          border-radius:10px; text-decoration:none; transition:all .2s;"
+   onmouseover="this.style.background='#a91d23';this.style.borderColor='#a91d23'"
+   onmouseout="this.style.background='#c7222a';this.style.borderColor='#c7222a'">
+  ↓ Download Resume
+</a>
+<div style="margin-top:48px; padding-top:40px; border-top:1px solid #ddd;"></div>
+    </div>
+  </div>
+</section>
+
+<!-- IMPACT METRICS -->
+<div class="metrics-bar">
+  <div class="container">
+    <div class="metrics-inner">
+      <div class="metric-item">
+        <div class="metric-num">2X</div>
+        <div class="metric-label">User Growth via UX-led Transformation</div>
+      </div>
+      <div class="metric-item">
+        <div class="metric-num">2.3M+</div>
+        <div class="metric-label">VPA Creations Enabled</div>
+      </div>
+      <div class="metric-item">
+        <div class="metric-num">75%</div>
+        <div class="metric-label">Outsourcing Cost Reduction</div>
+      </div>
+      <div class="metric-item">
+        <div class="metric-num">600+</div>
+        <div class="metric-label">Screens Delivered in &lt;4 Months</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- BRANDS MARQUEE -->
+<section class="marquee-wrap" aria-label="Brands worked with">
+  <div class="marquee-label">Trusted by leading banking, fintech &amp; insurance brands</div>
+  <div class="marquee-track" id="marquee-track">
+    <div class="marquee-item">Aditya Birla Capital <span class="tag">Payments</span></div>
+    <div class="marquee-item">SBI Life Insurance <span class="tag">Insurance</span></div>
+    <div class="marquee-item">FWD Insurance <span class="tag">Insurance</span></div>
+    <div class="marquee-item">Star Union Dai-ichi <span class="tag">Insurance</span></div>
+    <div class="marquee-item">HDFC Life <span class="tag">Insurance</span></div>
+    <div class="marquee-item">i-Magic <span class="tag">SaaS</span></div>
+    <div class="marquee-item">TATA AIA <span class="tag">Insurance</span></div>
+    <div class="marquee-item">Bharti AXA <span class="tag">Insurance</span></div>
+    <!-- duplicate for seamless loop -->
+    <div class="marquee-item">Aditya Birla Capital <span class="tag">Payments</span></div>
+    <div class="marquee-item">SBI Life Insurance <span class="tag">Insurance</span></div>
+    <div class="marquee-item">FWD Insurance <span class="tag">Insurance</span></div>
+    <div class="marquee-item">Star Union Dai-ichi <span class="tag">Insurance</span></div>
+    <div class="marquee-item">HDFC Life <span class="tag">Insurance</span></div>
+    <div class="marquee-item">i-Magic <span class="tag">SaaS</span></div>
+    <div class="marquee-item">TATA AIA <span class="tag">Insurance</span></div>
+    <div class="marquee-item">Bharti AXA <span class="tag">Insurance</span></div>
+  </div>
+</section>
+
+<!-- WORKS -->
+<!-- CHANGE 1: View More button reveals 2 additional case studies -->
+<section id="works" class="section" data-testid="works-section">
+  <div class="container">
+    <div class="section-head">
+      <div><span class="eyebrow">Selected Works</span></div>
+      <p class="section-intro">
+        Case studies across UPI payments, insurance sales tools, merchant platforms and redesigns.
+      </p>
+    </div>
+
+    <!-- Initial 4 case studies -->
+    <div class="works-grid">
+      <a class="work-card" href="case-study.html?id=1" data-testid="work-1">
+        <img class="thumb" src="static/abcd_app.png" alt="UPI & Bill Payments App" />
+        <div class="work-meta">
+          <span class="work-title">UPI &amp; Bill Payments App</span>
+          <span class="work-tag">Payments</span>
+        </div>
+        <div class="work-arrow">View case study →</div>
+      </a>
+       <a class="work-card" href="case-study.html?id=4" data-testid="work-4">
+        <img class="thumb" src="static/2) Wallets & cards Case study.png" alt="Merchant App & PPI Wallets" />
+        <div class="work-meta">
+          <span class="work-title">Prepaid wallets &amp; cards</span>
+          <span class="work-tag">Prepaid &amp; Wallets</span>
+        </div>
+        <div class="work-arrow">View case study →</div>
+      </a>
+
+      <a class="work-card" href="case-study.html?id=2" data-testid="work-2">
+        <img class="thumb" src="static/3) Payment checkout pg Case study.png" alt="Payment Lounge Redesign" />
+        <div class="work-meta">
+          <span class="work-title">Payment Lounge Redesign</span>
+          <span class="work-tag">Payments</span>
+        </div>
+        <div class="work-arrow">View case study →</div>
+      </a>
+          <a class="work-card" href="case-study.html?id=5" data-testid="work-5">
+        <img class="thumb" src="static/4) Forward Malaysian Case study.png" alt="FWD Insurance Portal" />
+        <div class="work-meta">
+          <span class="work-title">FWD Insurance Portal</span>
+          <span class="work-tag">Insurance</span>
+        </div>
+        <div class="work-arrow">View case study →</div>
+      </a>
+
+    
+
+     
+    </div>
+
+    <!-- Hidden extra 2 case studies, revealed on "View More" -->
+    <div class="works-more" id="worksMore">
+        <a class="work-card" href="case-study.html?id=3" data-testid="work-3">
+        <img class="thumb" src="static/5) SBI Life Case study.png" alt="SBI NASA – Sales Enablement App" />
+        <div class="work-meta">
+          <span class="work-title">SBI NASA — Sales Enablement App</span>
+          <span class="work-tag">Insurance</span>
+        </div>
+        <div class="work-arrow">View case study →</div>
+      </a>
+  
+
+      <a class="work-card" href="case-study.html?id=6" data-testid="work-6">
+        <img class="thumb" src="static/6) Insurance Concept videos.png" alt="Design System & Component Library" />
+        <div class="work-meta">
+          <span class="work-title">Insurance Concept Vidoes</span>
+          <span class="work-tag">Systems</span>
+        </div>
+        <div class="work-arrow">View case study →</div>
+      </a>
+    </div>
+
+    <!-- View More / View Less button -->
+    <div class="view-more-wrap">
+      <button class="view-more-btn" id="viewMoreBtn" onclick="toggleWorks()">
+        View More Works <span class="btn-arrow">↓</span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services" class="section" data-testid="services-section" style="padding-top:40px;">
+  <div class="container">
+    <div class="service-row" data-testid="service-1">
+      <div>
+        <div class="service-num">01</div>
+        <div class="service-name">Design Leadership</div>
+      </div>
+      <p class="service-desc">Led UX transformation resulting in 2X user growth, exponential UPI transaction scale, and ~40% improvement in payment reliability at Aditya Birla Capital Digital.</p>
+    </div>
+    <div class="service-row" data-testid="service-2">
+      <div>
+        <div class="service-num">02</div>
+        <div class="service-name">Design Systems at Scale</div>
+      </div>
+      <p class="service-desc">Established a scalable design system of 1000+ components in Figma, and built reusable libraries that cut delivery time by 50%+ on large screen-count projects.</p>
+    </div>
+    <div class="service-row" data-testid="service-3">
+      <div>
+        <div class="service-num">03</div>
+        <div class="service-name">Growth &amp; Adoption</div>
+      </div>
+      <p class="service-desc">Drove 45% growth in user adoption and enabled 2.3M+ VPA creations through UX-led redesign and onboarding optimization.</p>
+    </div>
+    <div class="service-row" data-testid="service-4">
+      <div>
+        <div class="service-num">04</div>
+        <div class="service-name">Team &amp; Cost Efficiency</div>
+      </div>
+      <p class="service-desc">Built and scaled an in-house UX team, reducing outsourcing costs by 75% while improving delivery efficiency and design quality.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="section" data-testid="about-section">
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero-left">
+        <img class="hero-image" data-testid="hero-image"
+             src="static/Rimpy professional photo.png"
+             alt="Rimpy Bhatia, Design Leader"
+             onerror="this.style.background='#e8d9b9';this.style.minHeight='300px';this.removeAttribute('onerror')" />
+        <h1 class="hero-name" data-testid="hero-name">Rimpy Bhatia</h1>
+      </div>
+      <div class="hero-right">
+        <h2 class="hero-welcome1" data-testid="hero-welcome1">I lead design the way I lead teams — with ownership, empathy and a relentless focus on the outcome, not just the artifact.</h2>
+        <p class="hero-desc" data-testid="hero-desc">
+          For 18+ years I've sat at the intersection of design, technology and business — translating regulatory complexity (RBI, NPCI compliance, KYC, sales paperwork) into interfaces that feel effortless. I currently lead the UI/UX team at Aditya Birla Capital Digital Payments, where I drive design thinking, scalable systems and stakeholder alignment across product, engineering and marketing.
+          <br><br>
+          I mentor designers, build component libraries that cut delivery time by half, and partner directly with CXOs and VPs to ship products that move the business forward.
+        </p>
+        <div style="margin-top:48px; padding-top:40px; border-top:1px solid #ddd;"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CHANGE 3: Experience Timeline — redesigned, left-aligned, oldest→newest left→right, clean above/below layout -->
+<section id="experience" class="experience-section">
+  <div class="experience-header">
+    <span class="eyebrow">Experience</span>
+  </div>
+  <div class="timeline-scroll-wrap">
+    <div class="timeline-outer">
+      <div class="timeline-spine"></div>
+      <div class="timeline-items">
+
+        <!-- COL 1: Oldest — Telemarketing Lead (BELOW the line) -->
+        <div class="tl-col" style="padding-left: 0;">
+          <!-- Empty above space -->
+          <div class="tl-above" style="visibility:hidden; min-height:180px;"></div>
+          <!-- Dot sits on the spine -->
+          <div style="position:relative; height:2px; width:100%;">
+            <div class="tl-dot" style="position:absolute; left:0; top:50%; transform:translateY(-50%); width:14px; height:14px; border-radius:50%; background:#fff; border:2px solid #ccc; z-index:3;"></div>
+          </div>
+          <!-- Content below -->
+          <div class="tl-below" style="padding-left:0;">
+            <div style="width:1px; height:24px; background:#e0ddd8; margin-left:6px; margin-bottom:12px;"></div>
+            <div class="tl-content">
+              <div class="tl-date">2007 – 2014</div>
+              <div class="tl-role">Telemarketing Lead</div>
+              <div class="tl-company">Leadership Foundations</div>
+              <div class="tl-desc">• Built nationwide engagement teams<br>• Standardized customer outreach<br>• Mentored and trained regional teams</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- COL 2: Content Head (ABOVE the line) -->
+        <div class="tl-col">
+          <!-- Content above -->
+          <div class="tl-above">
+            <div class="tl-content">
+              <div class="tl-date">2014 – 2016</div>
+              <div class="tl-role">Content Head</div>
+              <div class="tl-company">Datacomp Web Technologies</div>
+              <div class="tl-desc">Digital Content Leadership<br>• Led multilingual content strategy<br>• Managed UX Writing<br>• Built scalable content operations</div>
+            </div>
+            <div style="width:1px; height:24px; background:#e0ddd8; margin-left:26px; margin-top:12px;"></div>
+          </div>
+          <!-- Dot -->
+          <div style="position:relative; height:2px; width:100%;">
+            <div class="tl-dot" style="position:absolute; left:20px; top:50%; transform:translateY(-50%); width:14px; height:14px; border-radius:50%; background:#fff; border:2px solid #ccc; z-index:3;"></div>
+          </div>
+          <!-- Empty below -->
+          <div class="tl-below" style="visibility:hidden; min-height:180px;"></div>
+        </div>
+
+        <!-- COL 3: Project Lead (BELOW the line) -->
+        <div class="tl-col">
+          <!-- Empty above -->
+          <div class="tl-above" style="visibility:hidden; min-height:180px;"></div>
+          <!-- Dot -->
+          <div style="position:relative; height:2px; width:100%;">
+            <div class="tl-dot" style="position:absolute; left:20px; top:50%; transform:translateY(-50%); width:14px; height:14px; border-radius:50%; background:#fff; border:2px solid #ccc; z-index:3;"></div>
+          </div>
+          <!-- Content below -->
+          <div class="tl-below">
+            <div style="width:1px; height:24px; background:#e0ddd8; margin-left:26px; margin-bottom:12px;"></div>
+            <div class="tl-content">
+              <div class="tl-date">2016 – 2024</div>
+              <div class="tl-role">Project Lead — UI/UX Design</div>
+              <div class="tl-company">Datacomp Web Technologies</div>
+              <div class="tl-desc">Enterprise BFSI Experiences<br>• Led UX for India's leading insurers<br>• Managed Design &amp; Development teams<br>• Designed Magic Gyan platform<br>• Directed UX Writing &amp; Digital Strategy</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- COL 4: Latest — Lead Product Design (ABOVE the line, active) -->
+        <div class="tl-col active">
+          <!-- Content above -->
+          <div class="tl-above">
+            <div class="tl-content">
+              <div class="tl-date">Mar 2024 – Present</div>
+              <div class="tl-role">Lead Product Design (UI/UX)</div>
+              <div class="tl-company">Aditya Birla Capital Digital</div>
+              <div class="tl-desc">Scaling Fintech Design<br>• Built the in-house UX team (−75% outsourcing)<br>• 2.3M+ VPAs · +45% VPA adoption<br>• Led flagship UPI innovations<br>• Built Design System (1000+ screens)</div>
+            </div>
+            <div style="width:1px; height:24px; background:#e0ddd8; margin-left:26px; margin-top:12px;"></div>
+          </div>
+          <!-- Dot (active = dark red) -->
+          <div style="position:relative; height:2px; width:100%;">
+            <div class="tl-dot" style="position:absolute; left:20px; top:50%; transform:translateY(-50%); width:14px; height:14px; border-radius:50%; background:#C7222A; border:2px solid #C7222A; box-shadow:0 0 0 3px rgba(139,0,0,0.15); z-index:3;"></div>
+          </div>
+          <!-- Empty below -->
+          <div class="tl-below" style="visibility:hidden; min-height:180px;"></div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<!-- CHANGE 4: dark-red decorative circles/squares added via CSS ::before/::after and inline deco div -->
+<section id="reviews" class="section" data-testid="reviews-section">
+  <div class="container">
+    <div class="reviews-grid">
+      <div class="reviews-left-deco">
+        <span class="eyebrow">What People Say</span>
+        <p class="review-text">Testimonials from VPs, Heads of Product, and Chief Managers across BFSI.</p>
+      </div>
+      <div>
+        <div class="review-viewport">
+          <div class="review-track" id="reviewTrack" data-testid="review-track">
+
+            <div class="review-card">
+              <div class="review-card-inner-deco"></div>
+              <div class="review-author">
+                <div class="review-avatar">AK</div>
+                <div>
+                  <div class="author-title">Head of Payments, Aditya Birla Capital</div>
+                  <div class="author-name">Abinash Kumar</div>
+                </div>
+              </div>
+              <div>
+                <p class="review-quote">Your dedication, attention to detail, and unwavering sense of ownership truly set you apart. You inspire those around you with your commitment to excellence.</p>
+              </div>
+            </div>
+
+            <div class="review-card">
+              <div class="review-card-inner-deco"></div>
+              <div class="review-author">
+                <div class="review-avatar">SJ</div>
+                <div>
+                  <div class="author-title">Vice President, SBI Life</div>
+                  <div class="author-name">Sulabh Jain</div>
+                </div>
+              </div>
+              <div>
+                <p class="review-quote">Rimpy is knowledgeable and has a good understanding of UI/UX &amp; web designing. She is very adept at coordinating with everyone and always open to ideas.</p>
+              </div>
+            </div>
+
+            <div class="review-card">
+              <div class="review-card-inner-deco"></div>
+              <div class="review-author">
+                <div class="review-avatar">RM</div>
+                <div>
+                  <div class="author-title">Chief Manager, HDFC Life</div>
+                  <div class="author-name">Rahul Mishra</div>
+                </div>
+              </div>
+              <div>
+                <p class="review-quote">Rimpy has always impressed me with her design ability and has always been flexible enough to incorporate multiple rounds of iteration for better user experience.</p>
+              </div>
+            </div>
+
+            <div class="review-card">
+              <div class="review-card-inner-deco"></div>
+              <div class="review-author">
+                <div class="review-avatar">JV</div>
+                <div>
+                  <div class="author-title">Business Analyst</div>
+                  <div class="author-name">Jyoti Vedpathak</div>
+                </div>
+              </div>
+              <div>
+                <p class="review-quote">Rimpy possesses a remarkable ability to transform concepts into visually captivating designs — consistently effective in conveying the intended message.</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="review-dots" data-testid="review-dots">
+          <span class="review-dot active" data-i="0"></span>
+          <span class="review-dot" data-i="1"></span>
+          <span class="review-dot" data-i="2"></span>
+          <span class="review-dot" data-i="3"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta" class="cta" data-testid="cta-section">
+  <div class="container">
+    <h2 class="cta-title">Let's build something<br/>trusted.</h2>
+    <p class="cta-sub">Open to Head of Design, Design Director and Senior Product Design Leadership roles in Fintech, Banking and Insurance.</p>
+    <a href="mailto:rimpybhatia2211@gmail.com" class="cta-link" data-testid="get-in-touch">Get in touch →</a>
+    <div style="clear:both"></div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer" data-testid="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo">Rimpy Bhatia</div>
+        <div class="footer-info">
+          +91 98210 73747<br/>
+          rimpybhatia2211@gmail.com<br/>
+          Andheri (W), Mumbai, India
+        </div>
+      </div>
+      <div class="footer-links">
+        <a href="#works">Works</a>
+        <a href="#services">Services</a>
+        <a href="#about">About</a>
+        <a href="#reviews">Reviews</a>
+        <a href="#" onclick="openPDF(); return false;">AI &amp; Learning</a>
+        <a href="https://www.linkedin.com/in/rimpybhatia/" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2026 Rimpy Bhatia. All rights reserved.</div>
+  </div>
+</footer>
+
+<script>
+  // Mobile nav toggle
+  const toggle = document.querySelector('[data-testid="nav-toggle"]');
+  const navLinks = document.querySelector('[data-testid="nav-links"]');
+  toggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+  navLinks.querySelectorAll('a').forEach(a =>
+    a.addEventListener('click', () => navLinks.classList.remove('open'))
+  );
+
+  // CHANGE 1: View More / View Less toggle for works
+  function toggleWorks() {
+    const more = document.getElementById('worksMore');
+    const btn = document.getElementById('viewMoreBtn');
+    const isOpen = more.classList.toggle('visible');
+    btn.classList.toggle('open', isOpen);
+    btn.innerHTML = isOpen
+      ? 'View Less <span class="btn-arrow">↑</span>'
+      : 'View More Works <span class="btn-arrow">↓</span>';
+  }
+
+  // Reviews slider
+  const track = document.getElementById('reviewTrack');
+  const dots = document.querySelectorAll('.review-dot');
+  let current = 0;
+  const total = dots.length;
+
+  function goTo(i) {
+    current = (i + total) % total;
+    const cardWidth = track.children[0].getBoundingClientRect().width + 24;
+    track.style.transform = `translateX(-${current * cardWidth}px)`;
+    dots.forEach((d, idx) => d.classList.toggle('active', idx === current));
+  }
+  dots.forEach((d, idx) => d.addEventListener('click', () => goTo(idx)));
+
+  let auto = setInterval(() => goTo(current + 1), 5000);
+  track.addEventListener('mouseenter', () => clearInterval(auto));
+  track.addEventListener('mouseleave', () => { auto = setInterval(() => goTo(current + 1), 5000); });
+  window.addEventListener('resize', () => goTo(current));
+
+  function openPDF() {
+  const overlay = document.getElementById('pdfOverlay');
+  document.getElementById('pdfFrame').src = "static/Rimpy's Course Certification LinkedIn Carousel (1).pdf";
+  overlay.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+function closePDF() {
+  document.getElementById('pdfOverlay').style.display = 'none';
+  document.getElementById('pdfFrame').src = '';
+  document.body.style.overflow = '';
+}
+</script>
+</body>
+</html>
