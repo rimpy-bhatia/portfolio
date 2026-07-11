@@ -286,6 +286,7 @@
     return /^https?:\/\//i.test(url);
   }
 
+
   // NEW: detect phone-sized / mobile devices
   function isMobileDevice() {
     return window.innerWidth <= 768 || /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
@@ -298,11 +299,29 @@
     return url + '#view=FitH&toolbar=1';
   }
 
-  // Renders the "can't embed, open in new tab" fallback panel.
-  function renderExternalFallback(url) {
+
+
+  // iOS needs special handling — its iframe PDF renderer ignores fit params
+  function isIOS() {
+    return /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+           (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1); // iPadOS reports as Mac
+  }
+
+  function isAndroidOrMobile() {
+    return window.innerWidth <= 768 || /Android/i.test(navigator.userAgent);
+  }
+
+  // Chrome/Android respects this fragment; iOS Safari does not
+  function withMobilePdfFit(url) {
+    if (!/\.pdf($|\?)/i.test(url)) return url;
+    if (!isAndroidOrMobile() || isIOS()) return url;
+    return url + '#view=FitH&toolbar=1';
+  }
+
+  function renderExternalFallback(url, label) {
     wrap.innerHTML = `
       <div class="external-notice">
-        <p>This case study is hosted externally, please follow the link to view.</p>
+        <p>${label || 'This case study is hosted externally, please follow the link to view.'}</p>
         <a class="open-external" href="${url}" target="_blank" rel="noopener noreferrer">
           Open case study ↗
         </a>
@@ -322,7 +341,12 @@
     titleEl.textContent = cs.title;
     tagEl.textContent = cs.tag;
 
-    if (cs.type === 'gdrive') {
+    const isPdf = /\.pdf($|\?)/i.test(cs.url);
+
+    if (isPdf && isIOS()) {
+      // Best experience on iPhone/iPad: native full-screen PDF viewer
+      renderExternalFallback(cs.url, 'Tap below to view this PDF in full screen.');
+    } else if (cs.type === 'gdrive') {
       wrap.innerHTML = `<iframe class="viewer-frame" src="${withMobilePdfFit(cs.url)}" allow="autoplay" allowfullscreen></iframe>`;
     } else if (cs.type === 'prototype') {
       if (isExternalLink(cs.url)) {
