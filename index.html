@@ -315,7 +315,7 @@
   }
   .service-row:first-of-type { border-top: 1px solid #eee; }
   .service-num { font-size: 12px; color: #9a9a9a; letter-spacing: 0.08em; }
-  .service-name { font-size: 24px; font-weight: 700; letter-spacing: -0.02em; margin-top: 12px; }
+  .service-name { font-size: 22px; font-weight: 700; letter-spacing: -0.02em; margin-top: 12px; }
   .service-desc { color: #6b6b6b; font-size: 15px; line-height: 1.55; }
   .service-img {
     width: 100%; aspect-ratio: 16/6; object-fit: cover; border-radius: 2px;
@@ -362,14 +362,14 @@
   }
   /* The horizontal spine */
   .timeline-spine {
-    position: absolute;
-    left: 0; right: 0;
-    top: 50%;
-    height: 2px;
-    background: #e0ddd8;
-    transform: translateY(-50%);
-    z-index: 0;
-  }
+  position: absolute;
+  left: 0; right: 0;
+  top: 50%;
+  height: 0;
+  border-top: 2px dotted #c2777c;
+  transform: translateY(-50%);
+  z-index: 0;
+}
   .timeline-items {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -795,6 +795,18 @@
   .timeline-scroll-wrap { display: none; }
   .timeline-mobile { display: block; padding: 0 20px; }
 }
+.ai-learning-link {
+  color: #C7222A !important;
+  font-weight: 700;
+}
+.service-icon {
+  color: #C7222A;
+  margin-bottom: 14px;
+}
+.service-icon svg {
+  width: 30px;
+  height: 30px;
+}
 
 </style>
 </head>
@@ -813,8 +825,8 @@
       <a href="#about">About</a>
       <a href="#reviews">Testimonials</a>
       <!-- CHANGE 2: AI & Learning opens a PDF -->
-      <a href="#" onclick="openPDF(); return false;">AI &amp; Learning</a>
-    </nav>
+<!-- navbar -->
+<a href="#" class="ai-learning-link" onclick="openPDF(); return false;">AI &amp; Learning</a>    </nav>
   </div>
 </header>
 <!-- PDF Overlay -->
@@ -936,7 +948,7 @@
         </div>
         <div class="work-arrow">View case study →</div>
       </a>
-          <a class="work-card" href="case-study.html?id=5" data-testid="work-5">
+          <a class="work-card" href="https://xd.adobe.com/view/9c799ad2-d045-410a-99b1-e862cfabde54-c92a/" target="_blank" rel="noopener noreferrer" data-testid="work-5">
         <img class="thumb" src="static/4) Forward Malaysian Case study.png" alt="FWD Insurance Portal" />
         <div class="work-meta">
           <span class="work-title">FWD Insurance Portal</span>
@@ -952,7 +964,7 @@
 
     <!-- Hidden extra 2 case studies, revealed on "View More" -->
     <div class="works-more" id="worksMore">
-        <a class="work-card" href="case-study.html?id=3" data-testid="work-3">
+        <a class="work-card" href="https://xd.adobe.com/view/e9b8c5c6-1c8f-45b2-8d5b-d458816e18a7-bceb/?fullscreen" target="_blank" rel="noopener noreferrer" data-testid="work-3">
         <img class="thumb" src="static/5) SBI Life Case study.png" alt="SBI NASA – Sales Enablement App" />
         <div class="work-meta">
           <span class="work-title">SBI NASA — Sales Enablement App</span>
@@ -982,32 +994,67 @@
 </section>
 
 <!-- SERVICES -->
+ 
 <section id="services" class="section" data-testid="services-section" style="padding-top:40px;">
   <div class="container">
+    <div class="section-head">
+  <div><span class="eyebrow">Services</span></div>
+  <p class="section-intro">
+    Core areas of impact — from design leadership to scalable systems, growth, and team efficiency.
+  </p>
+</div>
     <div class="service-row" data-testid="service-1">
+      
       <div>
-        <div class="service-num">01</div>
+        <div class="service-icon">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="12" cy="12" r="10"></circle>
+    <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>
+  </svg>
+</div>
+        <!-- <div class="service-num">01</div> -->
         <div class="service-name">Design Leadership</div>
       </div>
       <p class="service-desc">Led UX transformation resulting in 2X user growth, exponential UPI transaction scale, and ~40% improvement in payment reliability at Aditya Birla Capital Digital.</p>
     </div>
     <div class="service-row" data-testid="service-2">
       <div>
-        <div class="service-num">02</div>
+        <div class="service-icon">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+    <polyline points="2 17 12 22 22 17"></polyline>
+    <polyline points="2 12 12 17 22 12"></polyline>
+  </svg>
+</div>
+        <!-- <div class="service-num">02</div> -->
         <div class="service-name">Design Systems at Scale</div>
       </div>
       <p class="service-desc">Established a scalable design system of 1000+ components in Figma, and built reusable libraries that cut delivery time by 50%+ on large screen-count projects.</p>
     </div>
     <div class="service-row" data-testid="service-3">
       <div>
-        <div class="service-num">03</div>
+        <div class="service-icon">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+    <polyline points="17 6 23 6 23 12"></polyline>
+  </svg>
+</div>
+        <!-- <div class="service-num">03</div> -->
         <div class="service-name">Growth &amp; Adoption</div>
       </div>
       <p class="service-desc">Drove 45% growth in user adoption and enabled 2.3M+ VPA creations through UX-led redesign and onboarding optimization.</p>
     </div>
     <div class="service-row" data-testid="service-4">
       <div>
-        <div class="service-num">04</div>
+        <div class="service-icon">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+    <circle cx="9" cy="7" r="4"></circle>
+    <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+  </svg>
+</div>
+        <!-- <div class="service-num">04</div> -->
         <div class="service-name">Team &amp; Cost Efficiency</div>
       </div>
       <p class="service-desc">Built and scaled an in-house UX team, reducing outsourcing costs by 75% while improving delivery efficiency and design quality.</p>
@@ -1018,6 +1065,10 @@
 <!-- ABOUT -->
 <section id="about" class="section" data-testid="about-section">
   <div class="container">
+    <div class="section-head">
+  <div><span class="eyebrow">About Me</span></div>
+
+</div>
     <div class="hero-grid">
       <div class="hero-left">
         <img class="hero-image" data-testid="hero-image"
@@ -1027,7 +1078,7 @@
         <h1 class="hero-name" data-testid="hero-name">Rimpy Bhatia</h1>
       </div>
       <div class="hero-right">
-        <h2 class="hero-welcome1" data-testid="hero-welcome1">I lead design the way I lead teams — with ownership, empathy and a relentless focus on the outcome, not just the artifact.</h2>
+        <h2 class="hero-welcome1" data-testid="hero-welcome1">I lead design the way I lead teams — with ownership, empathy and a relentless focus on the outcome.</h2>
         <p class="hero-desc" data-testid="hero-desc">
           For 18+ years I've sat at the intersection of design, technology and business — translating regulatory complexity (RBI, NPCI compliance, KYC, sales paperwork) into interfaces that feel effortless. I currently lead the UI/UX team at Aditya Birla Capital Digital Payments, where I drive design thinking, scalable systems and stakeholder alignment across product, engineering and marketing.
           <br><br>
@@ -1050,17 +1101,14 @@
       <div class="timeline-items">
 
         <!-- COL 1: Oldest — Telemarketing Lead (BELOW the line) -->
-        <div class="tl-col" style="padding-left: 0;">
-          <!-- Empty above space -->
-          <div class="tl-above" style="visibility:hidden; min-height:180px;"></div>
-          <!-- Dot sits on the spine -->
-          <div style="position:relative; height:2px; width:100%;">
-            <div class="tl-dot" style="position:absolute; left:0; top:50%; transform:translateY(-50%); width:14px; height:14px; border-radius:50%; background:#fff; border:2px solid #ccc; z-index:3;"></div>
-          </div>
-          <!-- Content below -->
-          <div class="tl-below" style="padding-left:0;">
-            <div style="width:1px; height:24px; background:#e0ddd8; margin-left:6px; margin-bottom:12px;"></div>
-            <div class="tl-content">
+       <div class="tl-col">
+  <div class="tl-above" style="visibility:hidden; min-height:200px;"></div>
+  <div style="position:relative; height:2px; width:100%;">
+    <div class="tl-dot" style="position:absolute; left:20px; top:50%; transform:translateY(-50%); width:14px; height:14px; border-radius:50%; background:#fff; border:2px solid #ccc; z-index:3;"></div>
+  </div>
+  <div class="tl-below">
+    <div style="width:1px; height:24px; background:#e0ddd8; margin-left:26px; margin-bottom:12px;"></div>
+     <div class="tl-content">
               <div class="tl-date">2007 – 2014</div>
               <div class="tl-role">Telemarketing Lead</div>
               <div class="tl-company">Leadership Foundations</div>
@@ -1086,13 +1134,14 @@
             <div class="tl-dot" style="position:absolute; left:20px; top:50%; transform:translateY(-50%); width:14px; height:14px; border-radius:50%; background:#fff; border:2px solid #ccc; z-index:3;"></div>
           </div>
           <!-- Empty below -->
-          <div class="tl-below" style="visibility:hidden; min-height:180px;"></div>
+                   <div class="tl-below" style="visibility:hidden; min-height:200px;"></div>
+
         </div>
 
         <!-- COL 3: Project Lead (BELOW the line) -->
         <div class="tl-col">
           <!-- Empty above -->
-          <div class="tl-above" style="visibility:hidden; min-height:180px;"></div>
+          <div class="tl-above" style="visibility:hidden; min-height:200px;"></div>
           <!-- Dot -->
           <div style="position:relative; height:2px; width:100%;">
             <div class="tl-dot" style="position:absolute; left:20px; top:50%; transform:translateY(-50%); width:14px; height:14px; border-radius:50%; background:#fff; border:2px solid #ccc; z-index:3;"></div>
@@ -1126,7 +1175,7 @@
             <div class="tl-dot" style="position:absolute; left:20px; top:50%; transform:translateY(-50%); width:14px; height:14px; border-radius:50%; background:#C7222A; border:2px solid #C7222A; box-shadow:0 0 0 3px rgba(139,0,0,0.15); z-index:3;"></div>
           </div>
           <!-- Empty below -->
-          <div class="tl-below" style="visibility:hidden; min-height:180px;"></div>
+          <div class="tl-below" style="visibility:hidden; min-height:200px;"></div>
         </div>
 
       </div>
@@ -1135,43 +1184,43 @@
   </div>
   <!-- Simple stacked timeline for mobile — avoids the spine-vs-text collision -->
   <div class="timeline-mobile">
-    <div class="tlm-item">
-      <div class="tlm-dot"></div>
-      <div class="tl-content">
-        <div class="tl-date">2007 – 2014</div>
-        <div class="tl-role">Telemarketing Lead</div>
-        <div class="tl-company">Leadership Foundations</div>
-        <div class="tl-desc">• Built nationwide engagement teams<br>• Standardized customer outreach<br>• Mentored and trained regional teams</div>
-      </div>
-    </div>
-    <div class="tlm-item">
-      <div class="tlm-dot"></div>
-      <div class="tl-content">
-        <div class="tl-date">2014 – 2016</div>
-        <div class="tl-role">Content Head</div>
-        <div class="tl-company">Datacomp Web Technologies</div>
-        <div class="tl-desc">Digital Content Leadership<br>• Led multilingual content strategy<br>• Managed UX Writing<br>• Built scalable content operations</div>
-      </div>
-    </div>
-    <div class="tlm-item">
-      <div class="tlm-dot"></div>
-      <div class="tl-content">
-        <div class="tl-date">2016 – 2024</div>
-        <div class="tl-role">Project Lead — UI/UX Design</div>
-        <div class="tl-company">Datacomp Web Technologies</div>
-        <div class="tl-desc">Enterprise BFSI Experiences<br>• Led UX for India's leading insurers<br>• Managed Design &amp; Development teams<br>• Designed Magic Gyan platform<br>• Directed UX Writing &amp; Digital Strategy</div>
-      </div>
-    </div>
-    <div class="tlm-item active">
-      <div class="tlm-dot"></div>
-      <div class="tl-content">
-        <div class="tl-date">Mar 2024 – Present</div>
-        <div class="tl-role">Lead Product Design (UI/UX)</div>
-        <div class="tl-company">Aditya Birla Capital Digital</div>
-        <div class="tl-desc">Scaling Fintech Design<br>• Built the in-house UX team (−75% outsourcing)<br>• 2.3M+ VPAs · +45% VPA adoption<br>• Led flagship UPI innovations<br>• Built Design System (1000+ screens)</div>
-      </div>
+  <div class="tlm-item active">
+    <div class="tlm-dot"></div>
+    <div class="tl-content">
+      <div class="tl-date">Mar 2024 – Present</div>
+      <div class="tl-role">Lead Product Design (UI/UX)</div>
+      <div class="tl-company">Aditya Birla Capital Digital</div>
+      <div class="tl-desc">Scaling Fintech Design<br>• Built the in-house UX team (−75% outsourcing)<br>• 2.3M+ VPAs · +45% VPA adoption<br>• Led flagship UPI innovations<br>• Built Design System (1000+ screens)</div>
     </div>
   </div>
+  <div class="tlm-item">
+    <div class="tlm-dot"></div>
+    <div class="tl-content">
+      <div class="tl-date">2016 – 2024</div>
+      <div class="tl-role">Project Lead — UI/UX Design</div>
+      <div class="tl-company">Datacomp Web Technologies</div>
+      <div class="tl-desc">Enterprise BFSI Experiences<br>• Led UX for India's leading insurers<br>• Managed Design &amp; Development teams<br>• Designed Magic Gyan platform<br>• Directed UX Writing &amp; Digital Strategy</div>
+    </div>
+  </div>
+  <div class="tlm-item">
+    <div class="tlm-dot"></div>
+    <div class="tl-content">
+      <div class="tl-date">2014 – 2016</div>
+      <div class="tl-role">Content Head</div>
+      <div class="tl-company">Datacomp Web Technologies</div>
+      <div class="tl-desc">Digital Content Leadership<br>• Led multilingual content strategy<br>• Managed UX Writing<br>• Built scalable content operations</div>
+    </div>
+  </div>
+  <div class="tlm-item">
+    <div class="tlm-dot"></div>
+    <div class="tl-content">
+      <div class="tl-date">2007 – 2014</div>
+      <div class="tl-role">Telemarketing Lead</div>
+      <div class="tl-company">Leadership Foundations</div>
+      <div class="tl-desc">• Built nationwide engagement teams<br>• Standardized customer outreach<br>• Mentored and trained regional teams</div>
+    </div>
+  </div>
+</div>
 </section>
 
 <!-- REVIEWS -->
@@ -1180,7 +1229,7 @@
   <div class="container">
     <div class="reviews-grid">
       <div class="reviews-left-deco">
-        <span class="eyebrow">What People Say</span>
+        <span class="eyebrow">Testimonials</span>
         <p class="review-text">Testimonials from VPs, Heads of Product, and Chief Managers across BFSI.</p>
       </div>
       <div>
